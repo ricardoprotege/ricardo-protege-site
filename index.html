@@ -294,7 +294,7 @@ footer a{color:var(--light)}
 
 <script>
   // LINK DE COTAÇÃO (powerlink do Ricardo). Deixe vazio até confirmar que as cotações caem na conta dele.
-  var COTACAO_URL = 'https://cotacao.me/mGxWLelx';
+  var COTACAO_URL = 'https://cotacao.me/mGxWLelx?id=PqZlL6kr';
   var cots = document.querySelectorAll('.js-cot');
   if (COTACAO_URL) {
     cots.forEach(function(a){ a.href = COTACAO_URL; });
@@ -324,5 +324,20 @@ footer a{color:var(--light)}
   } else { els.forEach(function(el){el.classList.add('in')}); }
 </script>
 <script src="https://resources.powercrm.com.br/assets/external/js/script.pwrcrm_whats.js?f=qdNoy4vEwV"></script>
+<script>
+  // Corrige um erro de digitação que vem pronto no botão do formulário do Power CRM ("WathasApp").
+  (function(){
+    function fix(){
+      try{
+        var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT),n;
+        while((n=w.nextNode())){ if(n.nodeValue.indexOf('WathasApp')>-1){ n.nodeValue=n.nodeValue.replace(/WathasApp/g,'WhatsApp'); } }
+        document.querySelectorAll('input[value*="WathasApp"]').forEach(function(i){ i.value=i.value.replace(/WathasApp/g,'WhatsApp'); });
+      }catch(e){}
+    }
+    if('MutationObserver' in window){ new MutationObserver(fix).observe(document.body,{childList:true,subtree:true,characterData:true}); }
+    fix();
+  })();
+</script>
+
 </body>
 </html>
